@@ -82,3 +82,21 @@ Ergo, this is the birthday .. in my mind.
 Everything like this is a “founding myth.” All I am pretty sure about is
 that the first key strokes of conception probably took place on that day
 (cross-producting my memory with my understanding of Matthew). "
+
+### Abandoning Jam 
+
+Teaching and paper-writing obligations took over in April 1995, and I was
+eager to get our pedagogic ideas in front of teachers and students. So
+instead of implementing the syntax and a translation to PLT Scheme, I
+focused on writing up teaching material. 
+
+After launching TeachScheme! with PLT Scheme and Chez in the summer of
+1995, I wrote an NSF proposal to the EHR division a year later. Even though
+I felt that the teaching with ()s had gone well in 95, I proposed to
+develop an alternative syntax, like the above, extended with the kind of
+symbols mathematics high school texts used. 
+
+The response from NSF's reviewers was pretty clear. This is a great idea,
+but needs more evidence before we can fund it at that scale. (They
+eventually did.) BUT, why change the notation when you already have one
+that works? People can adapt. 
