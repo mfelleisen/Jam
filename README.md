@@ -77,8 +77,8 @@ something close.
 
 Ergo, this is the birthday .. in my mind. 
 
+... 
+
 Everything like this is a “founding myth.” All I am pretty sure about is
 that the first key strokes of conception probably took place on that day
-(cross-producting my memory with my understanding of Matthew).  
-
-— Matthias"
+(cross-producting my memory with my understanding of Matthew). "
