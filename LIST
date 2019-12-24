@@ -1,0 +1,47 @@
+1. WHY WE NEED LISTS
+====================
+
+We need lists because 
+	(cons 1 2) 
+will immediately tell students that they don't have a list.
+If they first need to process the pair with some function, 
+the error is discovered way too late and it doesn't make 
+sense to them. With RUST they can also see where the erroneous 
+"list" is truly created. In case they use pairs, they can only 
+see where some function expected a NULL list and that it didn't
+get one. Finally, a function may even work just fine on an ill
+defined version of a function: 
+
+  reverse(l) = if empty?(l) then {} else reverse(l):first(l)
+
+will immediately be caught as wrong when applied to a list of 
+numbers. In Scheme it apparently works and the output apparently
+looks like a list :).
+
+2. LIST SYNTAX
+==============
+
+Infix notation for cons is natural. Indeed "," is most natural. 
+But it is unnatural to say that 
+	1,2,3,empty
+is a list with 3 elements. So we definitely need a syntax for
+long lists that avoids empty: 
+	1,2,3.
+where . abbreviates ,null. 
+
+Problem 1: what is f(1,2,3) ?
+  So we need to use something else than ",". 
+
+Problem 2: how do we print 1,2,3,empty? We print it as 1,2,3. because 
+  this is natural. But then 1,2,3,empty should "evaluate" to 1,2,3.
+  and how come they look the same? 
+
+This suggests a syntax for "long lists" that is different from the syntax
+for short lists AND something other than , as the infix cons. [] are too
+natural for matrix notation. {} is the only pairing thing left, unless we
+want to write list(...) or matrix[...]. Since lists are not too far away
+from sets, we decided on set notation for long lists and colon for infix
+cons. 
+
+	1:2:3:empty --> {1,2,3}
+

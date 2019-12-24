@@ -1,0 +1,50 @@
+Placeholders:
+	x ::= % need to define the set of identifiers %
+
+Definitions: 
+	D ::=	  x = E 
+		| x(F) = E
+	Ds ::=    epsilon
+		| D{, D}*
+
+Formal Parameters:
+	P ::=	  epsilon
+		| x{, x}*
+
+Expressions:
+	E ::=	  x
+		| x(A) 
+		| if E then E else E end
+		| cond [if E then E]{, [if E then E]}* {[else E]}
+		| local Ds in E end
+
+% modules? probably not in our first draft?
+		| module export: P from Ds end
+		| import x [as x] from x
+		| x.x	% for import %
+
+% state
+		| begin E{; E}* end
+		| set [x to E]{[x to E]}* end
+
+% control
+		| handle E with x
+		| raise E
+		| error E
+
+
+% basic data constants & primitive operations, incl. infix notation
+
+% primitive operations: 
+% numbers, boolean, symbols, chars
+% vectors of values, matrices, 
+
+		| o(A) % primitive operations
+
+Arguments:
+	A ::=	  epsilon
+		| E{, E}*
+	
+Programs:
+	P ::=	  E
+		| D{, D}* E

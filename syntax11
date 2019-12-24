@@ -1,0 +1,66 @@
+From duba@aten.cs.rice.edu Thu Mar 30 16:10:37 1995
+Date: Thu, 30 Mar 1995 16:10:33 -0600
+From: duba@aten.cs.rice.edu (Bruce Duba)
+To: shriram@aten.cs.rice.edu, matthias@aten.cs.rice.edu
+Subject: syntax
+
+
+<exp> := true | false 
+       | <number> 
+       | <number> i
+       | ` <char>* '
+       | " <char>* "
+       | <prim>
+       | <id>
+       | <uop> <exp>
+       | <exp> <bop> <exp>
+       | <exp> ( {<seq>} )
+       | if <exp> then <exp> {elseif <exp> then <exp>}* {else <exp> | endif} 
+       | let <defn>* in <exp>
+       | [ <seq> {; <seq>}* ]
+       | "{" {<seq>} "}"
+       | <lval>
+       | do <seq> and <exp>
+       | set <lval> to <exp>
+       | call <id> ( {<id> = <exp> { , <id> = <exp> }*} ) <exp>
+       | map ( {<id> {, <id>}*} ) to <exp>
+       | ( <exp> )
+ 
+<lval> := <sel-id> ( <exp> ) | <exp> [ <exp> {, <exp>} ]
+
+<defn> := <id> = <exp>
+        | <id> ( {<id> {, <id>}*}<formals> ) = <exp>
+        | <id> {( <sel-id> {, <sel-id>}* )} : <id>
+
+<seq> := <exp> {, <exp>}*
+
+<uop> := - | + | ~
+
+<bop> := + | - | * | / | ^ | = | <= | >= | =/= | < | > | & | "|"
+
+<prim> := same? | symbol?
+        | number? | zero? | positive? | add1 | sub1 | odd? | sqrt | log 
+          | sin | cos | tan | atan ...
+        | string? | substring
+        | matrix? | rows | columns 
+        | function? | arity | array? | length | sameArray?
+        | list? | empty? | cons? | cons | first | rest
+
+<char> := <charset> \ { \ , ` , ' , " , tab , newline} 
+        | \\ | \` | \'| \" | \n | \t
+
+<number> := {<sign>} <ureal>
+
+<sign>   := + | -
+
+<ureal> := <int>
+          | . <digit>+ <suffix>
+          | <digit>+ . <digit>* <suffix>
+
+<int>    := <digit>+ <suffix>
+
+<suffix> := {e {<sign>} {<digit>}+}
+
+<digit> := 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+
+

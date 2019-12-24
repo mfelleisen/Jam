@@ -1,0 +1,58 @@
+From duba@aten.cs.rice.edu Thu Feb 23 15:11:18 1995
+Date: Thu, 23 Feb 95 15:11:15 CST
+From: duba@aten.cs.rice.edu (Bruce Duba)
+To: matthias@aten.cs.rice.edu, shriram@aten.cs.rice.edu
+Subject: Jam
+
+I just took some scheme code and translated it into Jam (Shriram, you
+may recognize the program). Our "inorder" expression is weird when the
+return exp is also a side effect. Also, if 4k! is an id what about
+4k!*x ? Is it an id or a multiplication?
+
+rat(more, rational) = lda(more, numerator(rational), denominator(rational));
+
+lda(more, top, bot) =
+ let decimal = more-1
+ in 
+  do loop(top=top, more=more) =
+   inorder if more=decimal then display(`.') elsefalse
+   return
+    if more=0 then newline()
+    elseif top=0 then inorder display(0) return newline()
+    else inorder display(quotient(top, bot))
+         return loop(10*remainder(top, bot), more-1);
+
+// CF for root 2
+// The actual CF is [1;2,2,2,...]
+
+root2(n) =
+ do loop (top=1, bot=2, k=n) =
+  if k=0 then 1 + top/bot
+  else loop(bot, 2*bot + top, k-1);
+
+a=26390;
+c=396^4;
+
+pie(n) =
+ do loop(num=0, k=0, 4k=0, alpha=1103, 4k!=1, k!tothe4th=1, gamma=1) =
+  if k>n then num
+  else 
+   let nextk = k+1
+   in
+    loop(num + (4k! * alpha)/(k!tothe4th * gamma),
+         nextk,
+	 4k+4,
+         alpha+a,
+	 4k! * (4k+1) * (4k+2) * (4k+3) * (4k+ 4),
+	 k!tothe4th * next-k^4,
+	 gamma*c);
+
+pi(n) =
+ let factor = 2*root2(100*n) / 9801
+ in 1/(factor*pie(n));
+
+py(n, k) = rat(k, pi(n));
+
+
+
+

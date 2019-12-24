@@ -1,0 +1,57 @@
+<const> := true | false | <number> | `<char>*' | <prim>
+ 
+<exp> := <const>
+       | <id>
+       | <uop> <exp>
+       | <exp> <bop> <exp>
+       | <exp> ( {<seq>} )
+       | if <exp> then <exp> {elseif <exp> then <exp>}* {else <exp> | endif} 
+       | let <defn>* in <exp>
+       | "{" {<seq>} "}"
+       | [ <seq> {; <seq>}* ]
+       | "<char>*"
+       | <lval>
+       | do <seq> and <exp>
+       | set <lval> to <exp>
+       | ( <exp> )
+       | call <id> ( {<id> = <exp> { , <id> = <exp> }*} ) <exp>
+       | map ( {<id> {, <id>}*} ) to <exp>
+
+<lval> := <sel-id> ( <exp> ) | <exp> [ <exp> {, <exp>} ]
+
+<defn> := <id> = <exp>
+        | <id> ( {<id> {, <id>}*} ) = <exp>
+        | <id> {( <sel-id> {, <sel-id>}* )} : <id>
+
+<seq> := <exp> {, <exp>}*
+
+<uop> := - | + | ~
+
+<bop> := + | - | * | / | ^ | = | <= | >= | =/= | < | > | & | "|"
+
+<prim> := same? | symbol? | symbol2string
+        | number? | zero? | positive? | add1 | sub1 | odd? | sqrt | log 
+          | sin | cos | tan | atan ...
+        | string? | substring | samestring
+        | matrix? | rows | columns | vector?(?)
+        | function? | arity
+        | list? | empty? | cons?(?) | cons | first | rest
+
+<char> := <charset> \ { \ , ` , ' , " , tab , newline} 
+        | \\ | \` | \'| \" | \n | \t
+
+<number> := {<sign>}<ureal>{i}
+
+<sign> := + | -
+
+<ureal> := <int>
+         | .{<digit>}+<suffix>
+         | {<digit>}+.{<digit>}*<suffix>
+
+<int> := {<digit>}+<suffix>
+
+<suffix> := {e{<sign>}{<digit>}+}
+
+<digit> := 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+
+

@@ -1,0 +1,66 @@
+From shriram@asia.cs.rice.edu Sat Feb 18 15:48:25 1995
+Date: Sat, 18 Feb 95 15:48:20 CST
+From: shriram@asia.cs.rice.edu (Shriram Krishnamurthi)
+To: duba@aten.cs.rice.edu (Bruce Duba)
+Cc: matthias@aten.cs.rice.edu
+Subject: JAM
+In-Reply-To: <9502172052.AA01679@aten.cs.rice.edu>
+References: <9502172052.AA01679@aten.cs.rice.edu>
+
+D := i = E 
+   | i(P) = E
+   | kind i(P) : i
+
+Ds := epsilon
+    | D{; D}*
+
+P := epsilon
+   | i{, i}*
+
+E := C
+   | i
+   | i(A)
+   | i[A] 
+   | P(A)
+   | if E then E {elseif E then E}* ({else E}| endif)
+   | let Ds in E
+   | inorder E{; E}* return E
+   | set L to E
+   | (E)
+   | Uop E
+   | E Bop E
+   | [A{; A}*]
+
+A := epsilon
+   | E{, E}*
+
+L := i
+   | i[A]
+
+Uop := - | + 
+
+Bop := + | - | * | / | ^ | = | <= | >= | =/= | < | >
+
+P := tuple? | tabulate | size(?)
+   | array? | array | size(?)
+   | text? 
+   | number? | zero? | positive? | odd? | sqrt | log | sin | cos | tan | atan
+   | boolean? | and | or | not | xor | nand | nor
+?  | list? | null? | pair? | cons | list | car | cdr
+   | function?
+   | equal?
+
+C := true | false
+   | Sym
+   | Num
+   | empty
+
+Sym := `c*'
+
+c := \Char
+   | Char \ { \ , ' }
+
+where Num, Sym and Char represent all the syntactic numbers, symbols
+and characters, respectively.
+
+

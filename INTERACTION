@@ -1,0 +1,17 @@
+INTERACTION
+===========
+
+The interaction editor always replies with an indented line to a first
+carriage return. If the user hits <cr> again, it will attempt to evaluate
+the expression in the current state. 
+
+REASONING: 
+----------
+
+The scheme is consistent with the editor window.
+
+Return is natural for line feed and a second return is acceptable for
+starting evaluation.
+
+
+

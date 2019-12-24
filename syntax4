@@ -1,0 +1,134 @@
+From shriram@asia.cs.rice.edu Sun Feb 19 16:48:05 1995
+Date: Sun, 19 Feb 95 16:48:02 CST
+From: shriram@asia.cs.rice.edu (Shriram Krishnamurthi)
+To: duba@asia.cs.rice.edu, matthias@asia.cs.rice.edu
+Subject: JAM
+
+Debugged.
+
+D := i = E 
+   | i(F) = E
+   | kind i(F) : i
+
+Ds := epsilon
+    | D{; D}*
+
+F := epsilon
+   | i{, i}*
+
+E := C
+   | i
+   | i(A)
+   | i[A] 
+   | P(A)
+   | if E then E {elseif E then E}* ({else E}| endif)
+   | let Ds in E
+   | inorder E{; E}* return E
+   | set L to E
+   | (E)
+   | Uop E
+   | E Bop E
+   | [A{; A}*]
+
+A := epsilon
+   | E{, E}*
+
+L := i
+   | i[A]
+
+Uop := - | + 
+
+Bop := + | - | * | / | ^ | = | <= | >= | =/= | < | >
+
+P := tuple? | tabulate | size(?)
+   | array? | array | size(?)
+   | text? 
+   | number? | zero? | positive? | odd? | sqrt | log | sin | cos | tan | atan
+   | boolean? | and | or | not | xor | nand | nor
+?  | list? | null? | pair? | cons | list | car | cdr
+   | function?
+   | equal?
+
+C := true | false
+   | Sym
+   | Num
+   | empty
+
+Sym := `c*'
+
+c := \Char
+   | Char \ { \ , ' }
+
+where Num, Sym and Char represent all the syntactic numbers, symbols
+and characters, respectively.
+
+
+From duba@aten.cs.rice.edu Mon Feb 20 13:51:46 1995
+Date: Mon, 20 Feb 95 13:51:41 CST
+From: duba@aten.cs.rice.edu (Bruce Duba)
+To: shriram@aten.cs.rice.edu, matthias@aten.cs.rice.edu
+
+minor mods.
+
+D := i = E 
+   | i(F) = E
+   | i(F) : i
+
+Ds := epsilon
+    | D{; D}*
+
+F := epsilon
+   | i{, i}*
+
+E := C
+   | i
+   | i(A)
+   | i[A] 
+   | P(A)
+   | if E then E {elseif E then E}* ({else E} | {elsefalse})
+   | let Ds in E
+   | inorder A return E
+   | set L to E
+   | (E)
+   | Uop E
+   | E Bop E
+   | [A{; A}*]
+
+A := epsilon
+   | E{, E}*
+
+L := i
+   | i[A]
+
+Uop := - | + 
+
+Bop := + | - | * | / | ^ | = | <= | >= | =/= | < | >
+
+P := tuple? | tabulate | size(?)
+   | array? | array | size(?)
+   | symbol? 
+   | number? | zero? | positive? | odd? | sqrt | log | sin | cos | tan | atan
+   | and | or | not | xor | nand | nor
+?  | list? | null? | pair? | cons | list | car | cdr
+   | function?
+   | equal?
+
+C := true | false
+   | Sym
+   | String
+   | Num
+   | empty
+
+Sym := `c*'
+
+String := "c*"
+
+c := \Char
+   | Char \ { \ , ' }
+
+where Num, Sym and Char represent all the syntactic numbers, symbols
+and characters, respectively.
+
+
+
+

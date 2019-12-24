@@ -1,0 +1,98 @@
+<expr> := <constant>
+        | <val-id>
+        | <lval>
+        | [ <args> ]
+        | <expr> ( <args> )
+        | if <expr> then <expr> { elseif <expr> then <expr> }*
+          ( { else <expr> } | { endif } )
+        | let <defn>* in <expr>
+        | do <args> and <expr>
+        | set <lval> to <expr>
+        | call <fun-id> ( <inits> ) <expr>
+        | <uop> <expr>
+        | <expr> <bop> <expr>
+        | ( <expr> )
+
+<constant> := true | false
+            | <symbol>
+            | <number>
+            | <string>  ;; do we have these?
+
+<val-id> := <cons-id>
+          | <fun-id>
+          | <arg-id>
+          | <array-id>
+          | <prim>
+
+<lval> := <set-id>
+        | <expr> [ <seq> ]
+
+<seq> := <expr> { , <expr> }*
+
+<args> := epsilon
+        | <seq>
+
+<defn> := <set-id> = <expr>
+        | <fun-id> ( <formals> ) = <expr>
+        | <cons-id> ( <selectors> ) : <fun-id>
+        | <array-id> [ <seq> ] = <expr>
+
+<formals> := epsilon
+           | <arg-id> { , <arg-id> }*
+
+<selectors> := epsilon
+             | <fun-id> { , <fun-id> }*
+
+<inits> := epsilon
+         | <arg-id> = <expr> { , <arg-id> = <expr> }*
+
+<uop> := - | + | ~
+
+<bop> := + | - | * | / | ^ | = | <= | >= | =/= | < | > | & | |
+
+<prim> := symbol? | same?
+        | number? | zero? | positive? | add1 | sub1 | odd? | sqrt | log 
+          | sin | cos | tan | atan
+        | constructor? | constructed? | prim? ;; do we need or want these?
+        | function? | arity
+        | array? | array(shape, init) | shape | sameArray?
+        | list? | empty? | cons? | cons | first | rest
+        | equal?
+
+<symbol> := ` <char>* '
+
+<string> := " <char>* "
+
+<char> := <charset> \ { \ , ` , ' , " , tab , newline}
+        | \\ | \` | \'| \" | \n | \t
+
+<number> := <real>
+          | <imag>
+
+<imag>   := <real> i
+
+<real>   := <sign> <ureal>
+
+<sign>   := epsilon | + | -
+
+<ureal> := <int>
+          | . <digit>+ <suffix>
+          | <digit>+ . <digit>* <suffix>
+
+<int>    := <digit>+ <suffix>
+
+<suffix> := epsilon
+          | e <sign> <digit>+
+
+<digit> := 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+
+<value> := <constant>
+         | <val-id>
+         | <cons-id>( <vals> )
+         | [ <vals> ]
+
+<vals> := epsilon
+        | <value> { , <value> }*
+
+
+

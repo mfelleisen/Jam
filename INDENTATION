@@ -1,0 +1,20 @@
+INDENTATION
+===========
+
+The editor indents based on the last token in the line. If it is something
+that continues the current expression, it "tabs" to the beginning of the
+current expression. If it isn't, it only tabs to the last position on the
+"indentation stack."  The "del key" (or something like that) at the
+beginning of the line deletes enough white spaces to go back to the next
+"indentation stack" position.
+
+REASONING: 
+----------
+
+A more Scheme-like form of indentation requires a full-fledged parsing of
+terms as they are typed in, which is way too complicated. 
+
+Also, beginners attempt to insert their own spacing and aren't bothered by
+a lack of spacing the way we're bothered when Emacs doesn't go to the right
+column after hitting return. 
+

@@ -1,0 +1,107 @@
+From duba@aten.cs.rice.edu Mon Feb 27 11:04:14 1995
+Date: Mon, 27 Feb 95 11:04:12 CST
+From: duba@aten.cs.rice.edu (Bruce Duba)
+To: matthias@aten.cs.rice.edu
+Subject: [MAILER-DAEMON@aten.cs.rice.edu: Returned mail: User unknown]
+
+Date: Mon, 27 Feb 95 09:54:28 CST
+From: MAILER-DAEMON@aten.cs.rice.edu (Mail Delivery Subsystem)
+Subject: Returned mail: User unknown
+To: duba@aten.cs.rice.edu
+
+   ----- Transcript of session follows -----
+550 mathias... User unknown
+
+   ----- Unsent message follows -----
+Received: by aten.cs.rice.edu (AA06247); Mon, 27 Feb 95 09:54:28 CST
+Date: Mon, 27 Feb 95 09:54:28 CST
+From: duba (Bruce Duba)
+Message-Id: <9502271554.AA06247@aten.cs.rice.edu>
+To: mathias, shriram
+Subject: modified syntax
+
+<defn> := <id> = <expr>
+        | <id> ( <formals> ) = <expr>
+        | <id> ( <formals> ) : <id>
+
+<formals> := epsilon
+           | <id> { , <id> }*
+
+<inits> := epsilon
+         | <id> = <expr> { , <id> = <expr> }*
+
+<args> := epsilon
+        | <expr> { , <expr> }*
+
+<lval> := <id>
+        | <id> [ <args> ]
+
+<expr> := <constant>
+        | <id>
+        | <id> ( <args> )
+        | <id> [ <args> ]
+        | <prim>
+        | <prim> ( <args> )
+        | if <expr> then <expr> { elseif <expr> then <expr> }*
+          ( { else <expr> } | { done } )
+        | let <defn>* in <expr>
+        | do <args> and <expr>
+        | set <lval> to <expr>
+        | call <id> ( <inits> ) = <expr>
+        | <uop> <expr>
+        | <expr> <bop> <expr>
+        | [ <args> { ; <args> }* ]
+        | ( <expr> )
+
+<uop> := - | + | ~
+
+<bop> := + | - | * | / | ^ | = | <= | >= | =/= | < | > | & | |
+
+<prim> := tuple? | tabulate | size(?)
+        | array? | array | size(?)
+        | symbol? 
+        | number? | zero? | positive? | odd? | sqrt | log 
+        | sin | cos | tan | atan
+?       | list? | null? | pair? | cons | car | cdr
+        | function?
+        | equal?
+
+<constant> := true | false
+            | <symbol>
+            | <string>
+            | <number>
+            | empty
+
+<symbol> := ` <char>* '
+
+<string> := " <char>* "
+
+<char> := <charset> \ { \ , ` , ' , " , tab , newline}
+        | \\ | \` | \'| \" | \n | \t
+
+<number> := <real>
+          | <imag>
+
+<imag>   := <real> i
+
+<real>   := <sign> <ureal>
+
+<sign>   := epsilon | + | -
+
+<ureal> := <int>
+          | . <digit>+ <suffix>
+          | <digit>+ . <digit>* <suffix>
+
+<int>    := <digit>+ <suffix>
+
+<suffix> := epsilon
+          | e <sign> <digit>+
+
+<digit> := 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+
+where <charset> is currently left unspecified.
+
+
+
+
+

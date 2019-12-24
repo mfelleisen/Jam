@@ -1,0 +1,93 @@
+		Jam Syntax
+		==========
+
+Draft: 2/23/95
+
+<defn> := <id> = <expr>
+        | <id> ( <formals> ) = <expr>
+        | <id> ( <formals> ) : <id>
+
+<defns> := epsilon 
+         | <defn> { ; <defn> }*
+
+<formals> := epsilon
+           | <id> { , <id> }*
+
+<inits> := epsilon 
+         | <id> = <expr> { , <id> = <expr> }*
+
+<args> := epsilon
+        | <expr> { , <expr> }*
+
+<seq> := epsilon
+       | <expr> { ; <expr> }*
+
+<lval> := <id>
+        | <id> [ <args> ]
+
+<expr> := <constant>
+        | <id>
+        | <id> ( <args> )
+        | <id> [ <args> ]
+        | <prim>
+        | <prim> ( <args> )
+        | if <expr> then <expr> { elseif <expr> then <expr> }*
+          ( { else <expr> } | { elsefalse } )		!! else false
+        | let <defns> in <expr>
+        | inorder <seq> return <expr>			!! optional return
+        | set <lval> to <expr>
+        | do <id> ( <inits> ) = <expr>			!! call, not do (imp)
+        | <uop> <expr>
+        | <expr> <bop> <expr>
+        | [ <args> { ; <args> }* ]
+        | ( <expr> )
+
+<uop> := - | + 
+
+<bop> := + | - | * | / | ^ | = | <= | >= | =/= | < | >	!! = vs ==
+
+<prim> := tuple? | tabulate | size(?)
+        | array? | array | size(?)
+        | symbol? 
+        | number? | zero? | positive? | odd? | sqrt | log
+	          | sin | cos | tan | atan
+        | and | or | not | xor | nand | nor
+?       | list? | null? | pair? | cons | list | car | cdr
+        | function?
+        | equal?
+
+<constant> := true | false
+            | <symbol>
+            | <string>
+            | <number>
+            | empty
+
+<symbol> := ` <char>* '
+
+<string> := " <char>* "
+
+<char> := <charset> \ { \ , ' , " }
+        | \\ | \' | \" | \n | \t
+
+<number> := <real>					!! <int>
+          | <imag>
+
+<imag>   := <real> i
+
+<real>   := <sign> <ureal>
+
+<sign>   := epsilon | + | -
+
+<ureal>  := <digit>+ <suffix>
+          | . <digit>+ <suffix>
+          | <digit>+ . <digit>* <suffix>
+
+<suffix> := epsilon
+          | e <sign> <digit>+
+
+<digit> := 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+
+where <charset> is currently left unspecified.	!! ditto for <id>
+
+
+

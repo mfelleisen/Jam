@@ -1,0 +1,118 @@
+From duba@aten.cs.rice.edu Thu Mar  2 16:29:03 1995
+Date: Thu, 2 Mar 95 16:29:00 CST
+From: duba@aten.cs.rice.edu (Bruce Duba)
+To: matthias@aten.cs.rice.edu, shriram@aten.cs.rice.edu
+Subject: syntax
+
+<id> := <set-id>
+      | <val-id>
+
+<val-id> := <cons-id>
+          | <fun-id>
+          | <arg-id>
+          | <array-id>
+
+<value> := <constant>
+         | <prim>
+         | <val-id>
+         | <cons-id>( <vals> )
+         | list( <vals> )
+         | [ <val-seq> { ; <val-seq> }* ]
+  
+<val-seq> := <value> { , <value> }*
+
+<vals> := epsilon
+        | <val-seq>
+
+<defn> := <set-id> = <expr>
+        | <fun-id> ( <formals> ) = <expr>
+        | <cons-id> ( <selectors> ) : <fun-id>
+        | <array-id> [ <seq> ] = <expr>
+
+<formals> := epsilon
+           | <arg-id> { , <arg-id> }*
+
+<selectors> := epsilon
+             | <fun-id> { , <fun-id> }*
+
+<inits> := epsilon
+         | <arg-id> = <expr> { , <arg-id> = <expr> }*
+
+<seq> := <expr> { , <expr> }*
+
+<args> := epsilon
+        | <seq>
+
+<lval> := <set-id>
+        | <expr> [ <seq> ]
+
+<expr> := <value>
+        | <set-id>
+        | <expr> ( <args> )
+        | <expr> [ <seq> ]
+        | <prim> ( <args> )
+        | list ( <args> )
+        | [ <seq> { ; <seq> }* ]
+        | if <expr> then <expr> { elseif <expr> then <expr> }*
+          ( { else <expr> } | { endif } )
+        | let <defn>* in <expr>
+        | do <args> and <expr>
+        | set <lval> to <expr>
+        | call <fun-id> ( <inits> ) <expr>
+        | <uop> <expr>
+        | <expr> <bop> <expr>
+        | ( <expr> )
+
+<uop> := - | + | ~
+
+<bop> := + | - | * | / | ^ | = | <= | >= | =/= | < | > | & | |
+
+<prim> := tuple? | maketuple | tupleshape
+        | array? | makearray | arrayshape
+        | symbol? 
+        | number? | zero? | positive? | add1 | sub1 | odd? | sqrt | log 
+        | sin | cos | tan | atan
+        | list?
+        | cons? | cons | first | rest | 
+        | empty? 
+        | function?
+        | equal?
+
+<constant> := true | false
+            | empty
+            | <symbol>
+            | <string>
+            | <number>
+
+<symbol> := ` <char>* '
+
+<string> := " <char>* "
+
+<char> := <charset> \ { \ , ` , ' , " , tab , newline}
+        | \\ | \` | \'| \" | \n | \t
+
+<number> := <real>
+          | <imag>
+
+<imag>   := <real> i
+
+<real>   := <sign> <ureal>
+
+<sign>   := epsilon | + | -
+
+<ureal> := <int>
+          | . <digit>+ <suffix>
+          | <digit>+ . <digit>* <suffix>
+
+<int>    := <digit>+ <suffix>
+
+<suffix> := epsilon
+          | e <sign> <digit>+
+
+<digit> := 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+
+where <charset> is currently left unspecified.
+
+
+
+
