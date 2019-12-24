@@ -31,6 +31,8 @@ The meetings started way before this, but unfortunately there were no cell
 phones to take picture of blackboard designs, the paper designs are lost,
 the arguments and design rationales were oral, so this is what we got. 
 
+### 28 January 1995 
+
 As for the actual date, here is an email that I recently sent to Matthew,
 Robby, Jay, and Sam. 
 
